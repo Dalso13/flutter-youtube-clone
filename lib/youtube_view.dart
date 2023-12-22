@@ -11,6 +11,13 @@ class YouTubeView extends StatefulWidget {
 
 class _YouTubeViewState extends State<YouTubeView> {
   final repository = MovieRepository().getListMovie();
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,7 @@ class _YouTubeViewState extends State<YouTubeView> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('YouTube', style: TextStyle(color: Colors.white)),
+        title: const Text('YouTube', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 24),
@@ -78,14 +85,19 @@ class _YouTubeViewState extends State<YouTubeView> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+
         selectedItemColor: Colors.white,
         selectedIconTheme: IconThemeData(color: Colors.white),
         selectedLabelStyle:
         TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+
         unselectedItemColor: Colors.grey,
         unselectedIconTheme: IconThemeData(color: Colors.grey),
         unselectedLabelStyle:
             TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -163,6 +175,7 @@ class _YouTubeViewState extends State<YouTubeView> {
                         data.title,
                         style: const TextStyle(
                           color: Colors.white,
+                            fontWeight: FontWeight.bold
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -172,7 +185,7 @@ class _YouTubeViewState extends State<YouTubeView> {
                           Text(
                             data.chanel,
                             style: const TextStyle(
-                                color: Colors.grey, fontSize: 10),
+                                color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -181,7 +194,7 @@ class _YouTubeViewState extends State<YouTubeView> {
                             child: Text(
                               '· 조회수 ${data.views}',
                               style: const TextStyle(
-                                  color: Colors.grey, fontSize: 10),
+                                  color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
